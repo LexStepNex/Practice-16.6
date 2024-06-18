@@ -1,14 +1,16 @@
 #include <iostream>
 #include <sstream>
 
-bool control_operation(std::string str) {  //**Проверка на чистый ввод
+bool control_function(std::string str) {  //**Проверка на чистый ввод
   if (str.size() < 3) {
-    std::cerr << "Error. Input a<operation>b";
     return false;
   }
+  int count = 0;
 
-  for (int i = 0, dots = 0; i < str.size() - 1; i++) {
+  for (int i = count, dots = 0; i < str.size(); i++) {
     bool sign = str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/';
+    
+    count = i;
 
     if (str[i] == '.') dots++;
     if (dots > 1) return false;
@@ -19,20 +21,21 @@ bool control_operation(std::string str) {  //**Проверка на чисты�
       if (!sign) {
         return false;
       } else {
-        dots = 0;
-        for (int j = i + 1; j < str.size(); j++) {  // проверка числа справа + точка
-          if (str[i] == '.') dots++;
-          if (dots > 1) return false;
-
-          if (!isdigit(str[j]) && str[j] != '.') {
-            return false;
-          }
-        }
-        return true;
+        break;
       }
     }
   }
-  return false;
+  if (count == str.size() - 1) return false;
+
+  for (int i = count + 1, dots = 0; i < str.size(); i++) {  // проверка числа справа + точка
+    if (str[i] == '.') dots++;
+    if (dots > 1) return false;
+
+    if (!isdigit(str[i]) && str[i] != '.') {
+      return false;
+    }
+  }
+  return true;
 }
 
 double resultFun(double a, double b, char sign) {
@@ -57,18 +60,16 @@ int main() {
     std::cout << "Input you function(without spaces): ";
     std::getline(std::cin, function);
 
-    if (!control_operation(function)) {
+    if (!control_function(function)) {
       std::cerr << "Error. Function type only (number)(operation)(number)\n";
     }
-  } while (!control_operation(function));
+  } while (!control_function(function));
 
   double a, b;
   char operation;
 
   std::stringstream buffer_stream(function);
-
   buffer_stream >> a >> operation >> b;
-
   std::cout << "You function: " << a << operation << b << "\n";
 
   double result = resultFun(a, b, operation);
