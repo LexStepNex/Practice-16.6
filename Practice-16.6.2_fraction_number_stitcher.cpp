@@ -21,7 +21,7 @@ std::string beforDotAfterDot() {
     if (n == 0) {
       str += '.';
     }
-    
+
     n++;
   } while (n < 2);
 
@@ -29,7 +29,9 @@ std::string beforDotAfterDot() {
 }
 
 int main() {
-  double number = stod(beforDotAfterDot());
+  std::string fractionalNumber = beforDotAfterDot();
+
+  double number = stod(fractionalNumber);
 
   std::cout << "You number: " << number;
 }

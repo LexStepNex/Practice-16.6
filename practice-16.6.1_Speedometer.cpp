@@ -16,7 +16,7 @@ int main() {
       std::cin >> deltaSpeed;
 
       if (atof(speed_str) <= 0.f && deltaSpeed <= 0.f) {
-        std::cout << "the first delta speed must be greater than\n";
+        std::cerr << "the first delta speed must be greater than\n";
         continue;
       }
       break;
