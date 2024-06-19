@@ -26,21 +26,21 @@ bool input_control(std::string str) {
   std::stringstream buffer_str(str);
   buffer_str >> num_1 >> num_2 >> movement >> light;
 
-  for (int i = 0; i < num_1.size(); i++) {
+  for (int i = 0; i < num_1.size(); i++) { //проверка температуры в доме
     if (num_1[0] = '-') continue;
     if (!isdigit(num_1[i])) {
       std::cerr << "Enter the inside temperature as a number only\n";
       return false;
     }
   }
-  for (int i = 0; i < num_2.size(); i++) {
+  for (int i = 0; i < num_2.size(); i++) { //проверка температуры снаружи
     if (num_2[0] = '-') continue;
     if (!isdigit(num_2[i])) {
       std::cerr << "Enter the outside temperature as a number only\n";
       return false;
     }
   }
-  if (movement != "yes" && movement != "no") {
+  if (movement != "yes" && movement != "no") { 
     std::cerr << "Enter movement only: \"yes\" or \"no\"\n";
     return false;
   }
@@ -78,8 +78,7 @@ int light_inside(int switches, std::string light, bool times_Of_day, int time) {
 }
 
 int light_outside(int switches, std::string light, bool time) {
-  if (!(switches & LIGHT_OUTSIDE) && light == "yes" &&
-      time) {  // вкл свет в саду
+  if (!(switches & LIGHT_OUTSIDE) && light == "yes" && time) {  // вкл свет в саду
     switches |= LIGHT_OUTSIDE;
     std::cout << "LIGHT_OUTSIDE ON\n";
   } else if ((switches & LIGHT_OUTSIDE) && !time ||
@@ -91,11 +90,11 @@ int light_outside(int switches, std::string light, bool time) {
 }
 
 int heaters(int switches, int inside) {
-  if (!(switches & HEATING) && inside < 22) {  // вкл отопление труб
+  if (!(switches & HEATING) && inside < 22) {  // вкл отопление
     switches |= HEATING;
     std::cout << "HEATING ON\n";
   }
-  if ((switches & HEATING) && inside >= 25) {  // выкл отопление труб
+  if ((switches & HEATING) && inside >= 25) {  // выкл отопление 
     switches &= ~HEATING;
     std::cout << "HEATING OFF\n";
   }
@@ -115,11 +114,11 @@ int water_pipe(int switches, int outside) {
 }
 
 int air_conditioner(int switches, int inside) {
-  if (!(switches & CONDITIONER) && inside >= 30) {  // вкл отопление труб
+  if (!(switches & CONDITIONER) && inside >= 30) {  // вкл кондиционер
     switches |= CONDITIONER;
     std::cout << "CONDITION ON\n";
   }
-  if ((switches & CONDITIONER) && inside < 26) {  // выкл отопление труб
+  if ((switches & CONDITIONER) && inside < 26) {  // выкл кондиционер
     switches &= ~CONDITIONER;
     std::cout << "CONDITION OFF\n";
   }

@@ -1,4 +1,5 @@
 #include <iostream>
+
 std::string beforDotAfterDot() {
   std::string str = "";
   int value;
