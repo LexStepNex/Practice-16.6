@@ -30,6 +30,7 @@ int main() {
     if (atof(speed_str) < 0.f) {
       sprintf(speed_str, "%.2f", 0.f);
     }
+    
     result = speed_str;
     result.pop_back();
     result += " km/h";

@@ -30,6 +30,7 @@ std::string beforDotAfterDot() {
 }
 
 int main() {
+  std::cout << "Let's write a floating dot number\n";
   std::string fractionalNumber = beforDotAfterDot();
 
   double number = stod(fractionalNumber);
